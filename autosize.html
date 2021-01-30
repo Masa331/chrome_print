@@ -1,0 +1,77 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Labels</title>
+
+    <style type="text/css" media="all">
+/* @page testX { */
+/*   size: 150mm 100mm; */
+/* } */
+/*  */
+/*       .pageX { */
+/*         page: pageX; */
+/*         background-color: lightblue; */
+/*       } */
+
+      .sticker {
+        width: 60mm;
+        word-wrap: anywhere;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="pageX">
+      <span>foo</span>
+    </div>
+
+    <div class="sticker">
+      aaaaaaaaaaaaaaaaaa
+      aaaaaaaaaaaaaaaaaa
+    </div>
+
+    <div class="sticker">
+      1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+      222222222222222222222222222222222222222222222222
+      333333333333333333333333333333333333333333333333
+      444444444444444444444444444444444444444444444444
+      555555555555555555555555555555555555555555555555
+      666666666666666666666666666666666666666666666666
+      777777777777777777777777777777777777777777777777
+      888888888888888888888888888888888888888888888888
+      999999999999999999999999999999999999999999999999
+      aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+      bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+      cccccccccccccccccccccccccccccccccccccccccccccccc
+      dddddddddddddddddddddddddddddddddddddddddddddddd
+      eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+      ffffffffffffffffffffffffffffffffffffffffffffffff
+    </div>
+  </body>
+</html>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('computing');
+
+    const stickers = document.querySelectorAll('.sticker');
+    let rules = '';
+    let counter = 1;
+
+    for (sticker of stickers) {
+      const pxHeight = sticker.scrollHeight;
+      const mmHeight = pxHeight * 0.2645833333333;
+
+      rules = rules + ` @page sticker${counter} {size: 60mm ${mmHeight}mm;} .sticker${counter} {page: sticker${counter};}`
+      sticker.classList.add(`sticker${counter}`);
+
+      counter++;
+    }
+
+    var sheet = document.createElement('style');
+    sheet.innerHTML = rules;
+    document.body.appendChild(sheet);
+  })
+</script>
